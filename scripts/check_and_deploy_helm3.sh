@@ -52,8 +52,9 @@ if [ ! -z "${KUBERNETES_MASTER_ADDRESS}" ]; then
   kubectl config set-context custom-context --cluster=custom-cluster --user=sa-user --namespace="${CLUSTER_NAMESPACE}"
   kubectl config use-context custom-context
 fi
-kubectl get deployment tiller-deploy -n kube-system --ignore-not-found=true
+
 TILLER_INSTALLED=$(kubectl get deployment tiller-deploy -n kube-system --ignore-not-found=true)
+echo $TILLER_INSTALLED
 
 if [[ ${TILLER_INSTALLED} == *tiller-deploy* ]]; then
   echo "Tiller is installed. Please uninstall Tiller before continuing with Helm 3 deploy."
